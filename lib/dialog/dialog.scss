@@ -1,0 +1,47 @@
+@import "../helpers/helpers.scss";
+
+.fui-dailog-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: fade-out(#000000, 0.5);
+  height: 100vh;
+  width: 100vw;
+  font-family: $hei;
+  font-size: 16px;
+  .fui-dailog {
+    position: relative;
+    min-height: 150px;
+    width: 350px;
+    background: white;
+    border-radius: 4px;
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      .fui-dailog-icon {
+        height: 0.8em;
+        width: 0.8em;
+      }
+    }
+    &-main {
+      padding: 8px;
+    }
+    &-footer {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      button {
+        margin: 6px;
+        background: #0078d4;
+        border: none;
+        padding: 4px 8px;
+      }
+    }
+  }
+}
