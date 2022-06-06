@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import Dialog from "./dialog";
+import Dialog, { alert } from "./dialog";
 
 const DialogExample: React.FunctionComponent<any> = () => {
   const [x, setX] = useState(false);
@@ -8,8 +8,8 @@ const DialogExample: React.FunctionComponent<any> = () => {
   return (
     <Fragment>
       <div>
-        <h3>example1</h3>
-        <button onClick={() => setY(!y)}>alert</button>
+        <h3>example1.1</h3>
+        <button onClick={() => setY(!y)}>alert 组件</button>
         <Dialog
           visible={y}
           onClose={() => setY(false)}
@@ -25,6 +25,10 @@ const DialogExample: React.FunctionComponent<any> = () => {
         >
           <div>你好，我是 alert 组件!</div>
         </Dialog>
+      </div>
+      <div>
+        <h3>example1.2</h3>
+        <button onClick={() => alert("你好，我是 alert API")}>alert API</button>
       </div>
       <div>
         <h3>example2</h3>

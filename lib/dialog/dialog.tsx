@@ -23,7 +23,9 @@ const Dialog: React.FC<Props> = (props) => {
             <Icon
               name="close"
               className={sc("icon")}
-              onClick={() => props.onClose()}
+              onClick={() => {
+                props.onClose();
+              }}
             />
           </header>
           <main className={sc("main")}>{props.children}</main>
@@ -39,5 +41,35 @@ const Dialog: React.FC<Props> = (props) => {
   );
   return ReactDOM.createPortal(result, document.body); // 传送门
 };
+
+const alert = (content: string) => {
+  const close = () => {
+    ReactDOM.render(React.cloneElement(component, { visible: false }), div);
+    ReactDOM.unmountComponentAtNode(div);
+    div.remove();
+  };
+  const component = (
+    <Dialog
+      visible={true}
+      buttons={[
+        <button
+          onClick={() => {
+            close();
+          }}
+        >
+          确定
+        </button>,
+      ]}
+      onClose={() => close()}
+    >
+      {content}
+    </Dialog>
+  );
+  const div = document.createElement("div");
+  document.body.append(div);
+  ReactDOM.render(component, div);
+};
+
+export { alert };
 
 export default Dialog;
