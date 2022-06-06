@@ -3,3 +3,11 @@ function classes(...names: (string | undefined)[]) {
 }
 
 export default classes;
+
+const scopedClassMaker = (prifix: string) => {
+  return (name: string) => {
+    return [prifix, name].filter(Boolean).join("-");
+  };
+};
+
+export { scopedClassMaker };
