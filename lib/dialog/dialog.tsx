@@ -43,75 +43,45 @@ const Dialog: React.FC<Props> = (props) => {
 };
 
 const alert = (content: string) => {
-  const close = () => {
-    ReactDOM.render(React.cloneElement(component, { visible: false }), div);
-    ReactDOM.unmountComponentAtNode(div);
-    div.remove();
-  };
-  const component = (
-    <Dialog
-      visible={true}
-      buttons={[
-        <button
-          onClick={() => {
-            close();
-          }}
-        >
-          确定
-        </button>,
-      ]}
-      onClose={() => close()}
+  const buttons = [
+    <button
+      onClick={() => {
+        close();
+      }}
     >
-      {content}
-    </Dialog>
-  );
-  const div = document.createElement("div");
-  document.body.append(div);
-  ReactDOM.render(component, div);
+      确定
+    </button>,
+  ];
+  modal(content, buttons);
 };
 const confirm = (content: string) => {
-  const close = () => {
-    ReactDOM.render(React.cloneElement(component, { visible: false }), div);
-    ReactDOM.unmountComponentAtNode(div);
-    div.remove();
-  };
-  const component = (
-    <Dialog
-      visible={true}
-      buttons={[
-        <button
-          onClick={() => {
-            close();
-          }}
-        >
-          确定
-        </button>,
-        <button
-          onClick={() => {
-            close();
-          }}
-        >
-          取消
-        </button>,
-      ]}
-      onClose={() => close()}
+  const buttons = [
+    <button
+      onClick={() => {
+        close();
+      }}
     >
-      {content}
-    </Dialog>
-  );
-  const div = document.createElement("div");
-  document.body.append(div);
-  ReactDOM.render(component, div);
+      确定
+    </button>,
+    <button
+      onClick={() => {
+        close();
+      }}
+    >
+      取消
+    </button>,
+  ];
+  modal(content, buttons);
 };
 
-const modal = (content: string) => {
+const modal = (content: string, buttons?: any) => {
   const close = () => {
     ReactDOM.render(React.cloneElement(component, { visible: false }), div);
     ReactDOM.unmountComponentAtNode(div);
     div.remove();
   };
   const component = (
-    <Dialog visible={true} onClose={() => close()}>
+    <Dialog visible={true} onClose={() => close()} buttons={buttons}>
       {content}
     </Dialog>
   );
