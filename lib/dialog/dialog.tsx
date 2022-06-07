@@ -52,7 +52,7 @@ const alert = (content: string) => {
       确定
     </button>,
   ];
-  modal(content, buttons);
+  const close = modal(content, buttons); // 先调用 modal ，再赋值 close
 };
 const confirm = (content: string) => {
   const buttons = [
@@ -71,7 +71,7 @@ const confirm = (content: string) => {
       取消
     </button>,
   ];
-  modal(content, buttons);
+  const close = modal(content, buttons);
 };
 
 const modal = (content: string, buttons?: any) => {
@@ -88,6 +88,7 @@ const modal = (content: string, buttons?: any) => {
   const div = document.createElement("div");
   document.body.append(div);
   ReactDOM.render(component, div);
+  return close;
 };
 
 export { alert, confirm, modal };
