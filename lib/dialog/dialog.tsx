@@ -74,7 +74,7 @@ const confirm = (content: string) => {
   const close = modal(content, buttons);
 };
 
-const modal = (content: string, buttons?: any) => {
+const modal = (content: string, buttons?: ReactElement[]) => {
   const close = () => {
     ReactDOM.render(React.cloneElement(component, { visible: false }), div);
     ReactDOM.unmountComponentAtNode(div);
