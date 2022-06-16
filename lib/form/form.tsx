@@ -15,6 +15,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   value: FormValue;
   onChange: (newValue: FormValue) => void;
   button: ReactFragment;
+  onSubmit: () => void;
 }
 
 const Form: React.FC<Props> = (props) => {
@@ -24,8 +25,9 @@ const Form: React.FC<Props> = (props) => {
     // console.log(newFormData);
     props.onChange(newFormData);
   };
-  const onSubmit = () => {
-    console.log("我执行了");
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    props.onSubmit();
   };
   return (
     <form onSubmit={onSubmit}>
