@@ -1,0 +1,11 @@
+.gu-layout {
+  display: flex;
+  flex-direction: column;
+}
+.gu-layout-hasAside {
+  display: flex;
+  flex-grow: 1;
+  .gu-layout {
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,15 @@
+.gu-layout-x {
+  background: #4285f4;
+  color: white;
+  height: 50px;
+}
+.gu-layout-y {
+  background: lighten(#4285f4, 5%);
+  color: white;
+  flex-grow: 1;
+}
+.gu-layout-z {
+  background: #34a853;
+  color: white;
+  width: 100px;
+}
