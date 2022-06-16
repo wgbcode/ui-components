@@ -9,7 +9,10 @@ const Layout: React.FC<Props> = (props) => {
     .map((item) => item.props.children)
     .includes("aside"); // 强行断言：ReactElemtnt
   return (
-    <div className={hasAside ? "gu-layout-hasAside" : "gu-layout"} {...rest}>
+    <div
+      className={hasAside ? "gu-layout-hasAside" : "gu-layout-noAside"}
+      {...rest}
+    >
       {props.children}
     </div>
   );

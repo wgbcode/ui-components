@@ -5,6 +5,7 @@ import IconExample from "./lib/icon/icon.example";
 import ButtonExample from "./lib/button/button.example";
 import DialogExample from "./lib/dialog/dialog.example";
 import LayoutExample from "./lib/layout/layout.example";
+import FormExample from "./lib/form/form.example";
 
 ReactDOM.render(
   <Router>
@@ -17,24 +18,28 @@ ReactDOM.render(
           <h2>组件</h2>
           <ul>
             <li>
-              <Link to="/icon">Icon</Link>
-            </li>
-            <li>
               <Link to="/button">Button</Link>
             </li>
             <li>
-              <Link to="/dialog">对话框</Link>
+              <Link to="/icon">Icon</Link>
             </li>
             <li>
-              <Link to="/layout">布局</Link>
+              <Link to="/dialog">Dialog 对话框</Link>
+            </li>
+            <li>
+              <Link to="/layout">Layout 布局</Link>
+            </li>
+            <li>
+              <Link to="/form">Form 表单</Link>
             </li>
           </ul>
         </aside>
         <main>
-          <Route path="/icon" component={IconExample} />
           <Route path="/button" component={ButtonExample} />
+          <Route path="/icon" component={IconExample} />
           <Route path="/dialog" component={DialogExample} />
           <Route path="/layout" component={LayoutExample} />
+          <Route path="/form" component={FormExample} />
         </main>
       </div>
     </div>

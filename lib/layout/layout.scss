@@ -1,11 +1,11 @@
-.gu-layout {
+.gu-layout-noAside {
   display: flex;
   flex-direction: column;
 }
 .gu-layout-hasAside {
   display: flex;
   flex-grow: 1;
-  .gu-layout {
+  .gu-layout-noAside {
     flex-grow: 1;
   }
 }
