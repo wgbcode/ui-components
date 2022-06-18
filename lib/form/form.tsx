@@ -22,7 +22,6 @@ const Form: React.FC<Props> = (props) => {
   const formData = props.value;
   const onInputChange = (name: string, value: string) => {
     const newFormData = { ...formData, [name]: value };
-    // console.log(newFormData);
     props.onChange(newFormData);
   };
   const onSubmit = (e: any) => {
@@ -31,6 +30,7 @@ const Form: React.FC<Props> = (props) => {
   };
   return (
     <form onSubmit={onSubmit}>
+      {props.children}
       <table>
         <tbody>
           {props.fields.map((f: FieldsValue) => (
