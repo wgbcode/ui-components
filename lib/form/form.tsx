@@ -12,28 +12,37 @@ interface FieldsValue {
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
   fields: Array<FieldsValue>;
-  value: FormValue;
+  formData: FormValue;
   onChange: (newValue: FormValue) => void;
   button: ReactFragment;
   onSubmit: () => void;
+  transformError: (message: string) => FormValue;
+  errors: FormValue;
 }
 
 const Form: React.FC<Props> = (props) => {
-  const formData = props.value;
+  const {
+    formData,
+    fields,
+    errors,
+    transformError,
+    button,
+    onChange,
+    onSubmit,
+  } = props;
   const onInputChange = (name: string, value: string) => {
     const newFormData = { ...formData, [name]: value };
-    props.onChange(newFormData);
+    onChange(newFormData);
   };
-  const onSubmit = (e: any) => {
+  const submit = (e: any) => {
     e.preventDefault();
-    props.onSubmit();
+    onSubmit();
   };
   return (
-    <form onSubmit={onSubmit}>
-      {props.children}
+    <form onSubmit={submit}>
       <table>
         <tbody>
-          {props.fields.map((f: FieldsValue) => (
+          {fields.map((f: FieldsValue) => (
             <tr key={f.name}>
               <td>
                 <span>{f.label}</span>
@@ -45,10 +54,11 @@ const Form: React.FC<Props> = (props) => {
                   onChange={(e) => onInputChange(f.name, e.target.value)}
                 />
               </td>
+              <td>{errors[f.name] && transformError(errors[f.name][0])}</td>
             </tr>
           ))}
           <tr>
-            <td>{props.button}</td>
+            <td>{button}</td>
           </tr>
         </tbody>
       </table>

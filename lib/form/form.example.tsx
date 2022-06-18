@@ -8,14 +8,11 @@ const checkUserName = (
   succeed: () => void,
   fail: () => void
 ) => {
-  setTimeout(() => {
-    // console.log("我现在知道用户名是否存在");
-    if (usernames.indexOf(username) < 0) {
-      succeed();
-    } else {
-      fail();
-    }
-  }, 2000);
+  if (usernames.indexOf(username) < 0) {
+    succeed();
+  } else {
+    fail();
+  }
 };
 
 const FormExample: React.FC = () => {
@@ -33,7 +30,7 @@ const FormExample: React.FC = () => {
       checkUserName(
         username,
         () => resolve(""),
-        () => reject("用户名重复") // 返回一个被拒绝的 Promise 对象，并将参数传出
+        () => reject("unique") // 返回一个被拒绝的 Promise 对象，并将参数传出
       );
     });
   };
@@ -56,10 +53,20 @@ const FormExample: React.FC = () => {
       }
     });
   };
+  const transformError = (message: string) => {
+    const map: any = {
+      unique: "用户名已存在",
+      required: "输入内容不能为空",
+      minLength: "输入内容小于6个字符",
+      maxLength: "输入内容大于16个字符",
+      pattern: "字符样式不匹配，样式应为 0-9 | a-z | A-Z",
+    };
+    return map[message];
+  };
   return (
     <Form
       fields={fields}
-      value={formData}
+      formData={formData}
       onChange={(newValue) => setFormData(newValue)}
       button={
         <Fragment>
@@ -68,9 +75,9 @@ const FormExample: React.FC = () => {
         </Fragment>
       }
       onSubmit={() => onSubmit()}
-    >
-      {JSON.stringify(errors)}
-    </Form>
+      transformError={transformError}
+      errors={errors}
+    ></Form>
   );
 };
 

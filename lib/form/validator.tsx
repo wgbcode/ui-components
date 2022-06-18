@@ -19,16 +19,16 @@ const Validator = (
       addError(rule.key, promise);
     }
     if (!value && rule.required) {
-      addError(rule.key, "输入框不能为空");
+      addError(rule.key, "required");
     }
     if (value && rule.minLength && value.length < rule.minLength) {
-      addError(rule.key, "长度小于6个字符");
+      addError(rule.key, "minLength");
     }
     if (value && rule.maxLength && value.length > rule.maxLength) {
-      addError(rule.key, "长度大于16个字符");
+      addError(rule.key, "maxLength");
     }
     if (value && rule.pattern && !rule.pattern.test(value)) {
-      addError(rule.key, "字符样式不匹配");
+      addError(rule.key, "pattern");
     }
   });
   function hasError(
