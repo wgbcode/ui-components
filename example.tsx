@@ -6,6 +6,7 @@ import ButtonExample from "./lib/button/button.example";
 import DialogExample from "./lib/dialog/dialog.example";
 import LayoutExample from "./lib/layout/layout.example";
 import FormExample from "./lib/form/form.example";
+import ScrollExample from "./lib/scroll/scroll.example";
 
 ReactDOM.render(
   <Router>
@@ -32,6 +33,9 @@ ReactDOM.render(
             <li>
               <Link to="/form">Form 表单</Link>
             </li>
+            <li>
+              <Link to="/scroll">scroll 滚动条</Link>
+            </li>
           </ul>
         </aside>
         <main>
@@ -40,6 +44,7 @@ ReactDOM.render(
           <Route path="/dialog" component={DialogExample} />
           <Route path="/layout" component={LayoutExample} />
           <Route path="/form" component={FormExample} />
+          <Route path="/scroll" component={ScrollExample} />
         </main>
       </div>
     </div>
