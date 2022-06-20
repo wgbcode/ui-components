@@ -52,24 +52,31 @@ const Scroll: React.FC<Props> = (props) => {
   const onMouseMoveBar = (e: MouseEvent) => {
     if (draggingRef.current) {
       const delta = e.clientY - firstYRef.current;
-      //   console.log(firstBarTopRef.current + delta);
-
-      setBarTop(firstBarTopRef.current + delta);
+      const newBarTop = firstBarTopRef.current + delta;
+      setBarTop(newBarTop);
+      const scrollHeight = containerRef.current!.scrollHeight;
+      const viewHeight = containerRef.current!.getBoundingClientRect().height;
+      containerRef.current!.scrollTop = (newBarTop * scrollHeight) / viewHeight;
     }
   };
   const onMouseUpBar = () => {
     draggingRef.current = false;
-    // console.log("up");
   };
   useEffect(() => {
     document.addEventListener("mouseup", onMouseUpBar);
     document.addEventListener("mousemove", onMouseMoveBar);
+    return () => {
+      document.removeEventListener("mouseup", onMouseUpBar);
+      document.removeEventListener("mousemove", onMouseMoveBar);
+    };
   });
   return (
     <div className="fui-scroll">
       <div
         className="fui-scroll-item"
-        style={{ right: -scrollbarWidth() }}
+        style={{
+          right: -scrollbarWidth(),
+        }}
         onScroll={onScroll}
         ref={containerRef}
       >
@@ -97,7 +104,7 @@ const Scroll: React.FC<Props> = (props) => {
       {/* <div className="fui-scroll-track"></div> */}
       <div
         className="fui-scroll-bar"
-        style={{ height: barHeight, top: barTop }}
+        style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
         onMouseDown={onMouseDownBar}
       ></div>
     </div>
