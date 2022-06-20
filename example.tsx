@@ -34,7 +34,7 @@ ReactDOM.render(
               <Link to="/form">Form 表单</Link>
             </li>
             <li>
-              <Link to="/scroll">scroll 滚动条</Link>
+              <Link to="/scroll">Scroll 滚动条</Link>
             </li>
           </ul>
         </aside>

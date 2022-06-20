@@ -6,6 +6,26 @@ interface Props extends React.HTMLAttributes<HTMLElement> {}
 const Scroll: React.FC<Props> = (props) => {
   const [barHeight, setBarHeight] = useState(0);
   const [barTop, _setBarTop] = useState(0);
+  const [barVisible, setBarVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const draggingRef = useRef(false);
+  const firstYRef = useRef(0);
+  const firstBarTopRef = useRef(0);
+  const timeIdRef = useRef<null | number>(null);
+  useEffect(() => {
+    const div = containerRef.current;
+    const scrollHeight = div!.scrollHeight;
+    const viewHeight = div!.getBoundingClientRect().height;
+    setBarHeight((viewHeight * viewHeight) / scrollHeight);
+    document.addEventListener("mouseup", onMouseUpBar);
+    document.addEventListener("mousemove", onMouseMoveBar);
+    document.addEventListener("select", onSelected);
+    return () => {
+      document.removeEventListener("mouseup", onMouseUpBar);
+      document.removeEventListener("mousemove", onMouseMoveBar);
+      document.removeEventListener("select", onSelected);
+    };
+  });
   const setBarTop = (number: number) => {
     const div = containerRef.current;
     const scrollHeight = div!.scrollHeight;
@@ -26,24 +46,22 @@ const Scroll: React.FC<Props> = (props) => {
     document.body.removeChild(div);
     return width;
   };
-  const containerRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const div = containerRef.current;
-    const scrollHeight = div!.scrollHeight;
-    const viewHeight = div!.getBoundingClientRect().height;
-    setBarHeight((viewHeight * viewHeight) / scrollHeight);
-  });
 
   const onScroll = () => {
+    setBarVisible(true);
     const div = containerRef.current;
     const scrollHeight = div!.scrollHeight;
     const viewHeight = div!.getBoundingClientRect().height;
     const scrollTop = div!.scrollTop;
     setBarTop((scrollTop * viewHeight) / scrollHeight);
+    if (timeIdRef.current) {
+      window.clearTimeout(timeIdRef.current);
+    }
+    timeIdRef.current = window.setTimeout(() => {
+      setBarVisible(false);
+    }, 1000);
   };
-  const draggingRef = useRef(false);
-  const firstYRef = useRef(0);
-  const firstBarTopRef = useRef(0);
+
   const onMouseDownBar = (e: React.MouseEvent) => {
     draggingRef.current = true;
     firstYRef.current = e.clientY;
@@ -67,15 +85,6 @@ const Scroll: React.FC<Props> = (props) => {
       e.preventDefault();
     }
   };
-  useEffect(() => {
-    document.addEventListener("mouseup", onMouseUpBar);
-    document.addEventListener("mousemove", onMouseMoveBar);
-    document.addEventListener("select", onSelected);
-    return () => {
-      document.removeEventListener("mouseup", onMouseUpBar);
-      document.removeEventListener("mousemove", onMouseMoveBar);
-    };
-  });
   return (
     <div className="fui-scroll">
       <div
@@ -108,11 +117,13 @@ const Scroll: React.FC<Props> = (props) => {
         <p>20</p>
       </div>
       {/* <div className="fui-scroll-track"></div> */}
-      <div
-        className="fui-scroll-bar"
-        style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
-        onMouseDown={onMouseDownBar}
-      ></div>
+      {barVisible && (
+        <div
+          className="fui-scroll-bar"
+          style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
+          onMouseDown={onMouseDownBar}
+        ></div>
+      )}
     </div>
   );
 };
