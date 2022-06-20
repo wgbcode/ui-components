@@ -1,5 +1,6 @@
 .fui-scroll {
   border: 1px solid black;
+  display: flex;
   position: relative;
   height: 40vh;
   width: 300px;
@@ -12,5 +13,19 @@
     right: 0; // 需计算换取实际滚动条宽度并覆盖
     height: 40vh;
     overflow: auto;
+  }
+  &-track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+  &-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100px;
+    background: yellow;
+    width: 10px;
   }
 }
