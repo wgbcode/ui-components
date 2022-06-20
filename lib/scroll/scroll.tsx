@@ -5,7 +5,16 @@ interface Props extends React.HTMLAttributes<HTMLElement> {}
 
 const Scroll: React.FC<Props> = (props) => {
   const [barHeight, setBarHeight] = useState(0);
-  const [barTop, setBarTop] = useState(0);
+  const [barTop, _setBarTop] = useState(0);
+  const setBarTop = (number: number) => {
+    const div = containerRef.current;
+    const scrollHeight = div!.scrollHeight;
+    const viewHeight = div!.getBoundingClientRect().height;
+    const maxBarTop = ((scrollHeight - viewHeight) * viewHeight) / scrollHeight;
+    if (number > maxBarTop) return;
+    if (number < 0) return;
+    _setBarTop(number);
+  };
   const scrollbarWidth = () => {
     const div = document.createElement("div");
     div.style.position = "absolute";
@@ -29,10 +38,33 @@ const Scroll: React.FC<Props> = (props) => {
     const div = containerRef.current;
     const scrollHeight = div!.scrollHeight;
     const viewHeight = div!.getBoundingClientRect().height;
-    const scrollTopHeight = div!.scrollTop;
-    setBarTop((scrollTopHeight * viewHeight) / scrollHeight);
+    const scrollTop = div!.scrollTop;
+    setBarTop((scrollTop * viewHeight) / scrollHeight);
   };
+  const draggingRef = useRef(false);
+  const firstYRef = useRef(0);
+  const firstBarTopRef = useRef(0);
+  const onMouseDownBar = (e: React.MouseEvent) => {
+    draggingRef.current = true;
+    firstYRef.current = e.clientY;
+    firstBarTopRef.current = barTop;
+  };
+  const onMouseMoveBar = (e: MouseEvent) => {
+    if (draggingRef.current) {
+      const delta = e.clientY - firstYRef.current;
+      //   console.log(firstBarTopRef.current + delta);
 
+      setBarTop(firstBarTopRef.current + delta);
+    }
+  };
+  const onMouseUpBar = () => {
+    draggingRef.current = false;
+    // console.log("up");
+  };
+  useEffect(() => {
+    document.addEventListener("mouseup", onMouseUpBar);
+    document.addEventListener("mousemove", onMouseMoveBar);
+  });
   return (
     <div className="fui-scroll">
       <div
@@ -62,10 +94,11 @@ const Scroll: React.FC<Props> = (props) => {
         <p>19</p>
         <p>20</p>
       </div>
-      <div className="fui-scroll-track"></div>
+      {/* <div className="fui-scroll-track"></div> */}
       <div
         className="fui-scroll-bar"
         style={{ height: barHeight, top: barTop }}
+        onMouseDown={onMouseDownBar}
       ></div>
     </div>
   );
