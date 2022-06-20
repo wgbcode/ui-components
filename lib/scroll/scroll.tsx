@@ -62,9 +62,15 @@ const Scroll: React.FC<Props> = (props) => {
   const onMouseUpBar = () => {
     draggingRef.current = false;
   };
+  const onSelected = (e: MouseEvent) => {
+    if (containerRef.current) {
+      e.preventDefault();
+    }
+  };
   useEffect(() => {
     document.addEventListener("mouseup", onMouseUpBar);
     document.addEventListener("mousemove", onMouseMoveBar);
+    document.addEventListener("select", onSelected);
     return () => {
       document.removeEventListener("mouseup", onMouseUpBar);
       document.removeEventListener("mousemove", onMouseMoveBar);
