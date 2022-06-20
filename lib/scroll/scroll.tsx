@@ -1,22 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./scroll.scss";
 
-interface Props extends React.HTMLAttributes<HTMLElement> {}
+interface Props extends React.HTMLAttributes<HTMLElement> {
+  onPull: () => void;
+}
 
 const Scroll: React.FC<Props> = (props) => {
   const [barHeight, setBarHeight] = useState(0);
   const [barTop, _setBarTop] = useState(0);
   const [barVisible, setBarVisible] = useState(false);
+  const [translateY, setTranslateY] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef(false);
   const firstYRef = useRef(0);
+  const firstTouchYRef = useRef(0);
   const firstBarTopRef = useRef(0);
   const timeIdRef = useRef<null | number>(null);
+  const pullingRef = useRef(false);
   useEffect(() => {
-    const div = containerRef.current;
-    const scrollHeight = div!.scrollHeight;
-    const viewHeight = div!.getBoundingClientRect().height;
-    setBarHeight((viewHeight * viewHeight) / scrollHeight);
+    setBarHeight(
+      (height().viewHeight * height().viewHeight) / height().scrollHeight
+    );
     document.addEventListener("mouseup", onMouseUpBar);
     document.addEventListener("mousemove", onMouseMoveBar);
     document.addEventListener("select", onSelected);
@@ -26,11 +30,16 @@ const Scroll: React.FC<Props> = (props) => {
       document.removeEventListener("select", onSelected);
     };
   });
+  const height = () => {
+    const scrollHeight = containerRef.current!.scrollHeight;
+    const viewHeight = containerRef.current!.getBoundingClientRect().height;
+    const scrollTop = containerRef.current!.scrollTop;
+    return { scrollHeight, viewHeight, scrollTop };
+  };
   const setBarTop = (number: number) => {
-    const div = containerRef.current;
-    const scrollHeight = div!.scrollHeight;
-    const viewHeight = div!.getBoundingClientRect().height;
-    const maxBarTop = ((scrollHeight - viewHeight) * viewHeight) / scrollHeight;
+    const maxBarTop =
+      ((height().scrollHeight - height().viewHeight) * height().viewHeight) /
+      height().scrollHeight;
     if (number > maxBarTop) return;
     if (number < 0) return;
     _setBarTop(number);
@@ -46,14 +55,11 @@ const Scroll: React.FC<Props> = (props) => {
     document.body.removeChild(div);
     return width;
   };
-
   const onScroll = () => {
     setBarVisible(true);
-    const div = containerRef.current;
-    const scrollHeight = div!.scrollHeight;
-    const viewHeight = div!.getBoundingClientRect().height;
-    const scrollTop = div!.scrollTop;
-    setBarTop((scrollTop * viewHeight) / scrollHeight);
+    setBarTop(
+      (height().scrollTop * height().viewHeight) / height().scrollHeight
+    );
     if (timeIdRef.current) {
       window.clearTimeout(timeIdRef.current);
     }
@@ -72,9 +78,8 @@ const Scroll: React.FC<Props> = (props) => {
       const delta = e.clientY - firstYRef.current;
       const newBarTop = firstBarTopRef.current + delta;
       setBarTop(newBarTop);
-      const scrollHeight = containerRef.current!.scrollHeight;
-      const viewHeight = containerRef.current!.getBoundingClientRect().height;
-      containerRef.current!.scrollTop = (newBarTop * scrollHeight) / viewHeight;
+      containerRef.current!.scrollTop =
+        (newBarTop * height().scrollHeight) / height().viewHeight;
     }
   };
   const onMouseUpBar = () => {
@@ -83,6 +88,25 @@ const Scroll: React.FC<Props> = (props) => {
   const onSelected = (e: MouseEvent) => {
     if (containerRef.current) {
       e.preventDefault();
+    }
+  };
+  const onTouchStart = (e: React.TouchEvent) => {
+    const scrollTop = height().scrollTop;
+    if (scrollTop !== 0) return;
+    firstTouchYRef.current = e.touches[0].screenY;
+    pullingRef.current = true;
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    const deltaY = e.touches[0].screenY - firstTouchYRef.current;
+    if (deltaY < 0) return;
+    if (deltaY > 50) return;
+    setTranslateY(deltaY);
+  };
+  const onTouchEnd = () => {
+    if (pullingRef.current) {
+      props.onPull();
+      pullingRef.current = false;
+      setTranslateY(0);
     }
   };
   return (
@@ -94,7 +118,16 @@ const Scroll: React.FC<Props> = (props) => {
         }}
         onScroll={onScroll}
         ref={containerRef}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       >
+        <div
+          className="fui-scroll-item-pulling"
+          style={{ height: `${translateY}px` }}
+        >
+          {translateY > 20 ? "下拉更新" : ""}
+        </div>
         <p>1</p>
         <p>2</p>
         <p>3</p>
@@ -116,7 +149,6 @@ const Scroll: React.FC<Props> = (props) => {
         <p>19</p>
         <p>20</p>
       </div>
-      {/* <div className="fui-scroll-track"></div> */}
       {barVisible && (
         <div
           className="fui-scroll-bar"
