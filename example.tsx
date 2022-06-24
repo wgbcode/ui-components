@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, NavLink } from "react-router-dom";
 import IconExample from "./lib/icon/icon.example";
 import ButtonExample from "./lib/button/button.example";
 import DialogExample from "./lib/dialog/dialog.example";
@@ -9,7 +9,6 @@ import FormExample from "./lib/form/form.example";
 import ScrollExample from "./lib/scroll/scroll.example";
 import Icon from "./lib/icon/icon";
 import "./example.scss";
-// import classes from "./lib/helpers/classes";
 
 ReactDOM.render(
   <Router>
@@ -30,22 +29,34 @@ ReactDOM.render(
           <div className="wu-content-aside-title">组件总览</div>
           <ul className="wu-content-aside-nav">
             <li>
-              <Link to="/button">Button</Link>
+              <NavLink to="/button" activeClassName="active">
+                Button
+              </NavLink>
             </li>
             <li>
-              <Link to="/icon">Icon 图标</Link>
+              <NavLink to="/icon" activeClassName="active">
+                Icon 图标
+              </NavLink>
             </li>
             <li>
-              <Link to="/dialog">Dialog 对话框</Link>
+              <NavLink to="/dialog" activeClassName="active">
+                Dialog 对话框
+              </NavLink>
             </li>
             <li>
-              <Link to="/layout">Layout 布局</Link>
+              <NavLink to="/layout" activeClassName="active">
+                Layout 布局
+              </NavLink>
             </li>
             <li>
-              <Link to="/form">Form 表单</Link>
+              <NavLink to="/form" activeClassName="active">
+                Form 表单
+              </NavLink>
             </li>
             <li>
-              <Link to="/scroll">Scroll 滚动条</Link>
+              <NavLink to="/scroll" activeClassName="active">
+                Scroll 滚动条
+              </NavLink>
             </li>
           </ul>
         </aside>

@@ -1,3 +1,4 @@
-// export { default as Icon } from "./icon/icon";
+import Dialog, { alert, confirm, modal } from "./dialog/dialog";
+import Icon from "./icon/icon";
 
-// import "./index.scss";
+export { Icon, Dialog, alert, confirm, modal };

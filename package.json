@@ -1,6 +1,6 @@
 {
-  "name": "ui-components",
-  "version": "1.1.1",
+  "name": "wu-ui-react",
+  "version": "1.0.7",
   "description": "",
   "main": "dist/lib/index",
   "types": "dist/lib/index",
