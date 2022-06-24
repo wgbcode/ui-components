@@ -8,26 +8,31 @@ import LayoutExample from "./lib/layout/layout.example";
 import FormExample from "./lib/form/form.example";
 import ScrollExample from "./lib/scroll/scroll.example";
 import Icon from "./lib/icon/icon";
+import { scopedClassMaker } from "./lib/helpers/classes";
 import "./example.scss";
+
+const sc = scopedClassMaker("wu-webPage");
+const sc1 = scopedClassMaker("wu-webPage-navBar");
+const sc2 = scopedClassMaker("wu-webPage-content");
 
 ReactDOM.render(
   <Router>
     <div className="wu-webPage">
-      <header className="wu-navBar">
-        <div className="wu-navBar-header">
-          <div className="wu-navBar-header-icon">
+      <header className={sc("navBar")}>
+        <div className={sc1("header")}>
+          <div className={sc1("header-icon")}>
             <Icon name="UILogo" />
           </div>
-          <h2 className="wu-navBar-header-text">Wu-UI-React</h2>
+          <h2 className={sc1("header-text")}>Wu-UI-React</h2>
         </div>
-        <div className="wu-navBar-footer">
+        <div className={sc1("footer")}>
           <Icon name="github" />
         </div>
       </header>
-      <div className="wu-content">
-        <aside className="wu-content-aside">
-          <div className="wu-content-aside-title">组件总览</div>
-          <ul className="wu-content-aside-nav">
+      <div className={sc("content")}>
+        <aside className={sc2("aside")}>
+          <div className={sc2("aside-title")}>组件总览</div>
+          <ul className={sc2("aside-nav")}>
             <li>
               <NavLink to="/button" activeClassName="active">
                 Button
@@ -60,7 +65,7 @@ ReactDOM.render(
             </li>
           </ul>
         </aside>
-        <main className="wu-content-main">
+        <main className={sc2("main")}>
           <Route path="/button" component={ButtonExample} />
           <Route path="/icon" component={IconExample} />
           <Route path="/dialog" component={DialogExample} />
@@ -69,6 +74,17 @@ ReactDOM.render(
           <Route path="/scroll" component={ScrollExample} />
         </main>
       </div>
+      <footer className={sc("footer")}>
+        <div className={sc("footer-left")}>
+          <Icon name="github" />
+          <span>Github</span>
+        </div>
+
+        <div className={sc("footer-right")}>
+          <Icon name="react" />
+          <span>Wu-UI-React</span>
+        </div>
+      </footer>
     </div>
   </Router>,
   document.querySelector("#root")
