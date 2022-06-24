@@ -9,7 +9,7 @@ const Scroll: React.FC<Props> = (props) => {
   const [barHeight, setBarHeight] = useState(0);
   const [barTop, _setBarTop] = useState(0);
   const [barVisible, setBarVisible] = useState(false);
-  const [translateY, setTranslateY] = useState(0);
+  const [pullBoxHeightY, setPullBoxHeightY] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef(false);
   const firstYRef = useRef(0);
@@ -100,13 +100,13 @@ const Scroll: React.FC<Props> = (props) => {
     const deltaY = e.touches[0].screenY - firstTouchYRef.current;
     if (deltaY < 0) return;
     if (deltaY > 50) return;
-    setTranslateY(deltaY);
+    setPullBoxHeightY(deltaY);
   };
   const onTouchEnd = () => {
     if (pullingRef.current) {
       props.onPull();
       pullingRef.current = false;
-      setTranslateY(0);
+      setPullBoxHeightY(0);
     }
   };
   return (
@@ -124,9 +124,9 @@ const Scroll: React.FC<Props> = (props) => {
       >
         <div
           className="fui-scroll-item-pulling"
-          style={{ height: `${translateY}px` }}
+          style={{ height: `${pullBoxHeightY}px` }}
         >
-          {translateY > 20 ? "下拉更新" : ""}
+          {pullBoxHeightY > 20 ? "下拉更新" : ""}
         </div>
         <p>1</p>
         <p>2</p>
