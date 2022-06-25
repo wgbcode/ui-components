@@ -1,8 +1,15 @@
+import { scopedClassMaker } from "../helpers/classes";
 import React, { Fragment, useState } from "react";
 import Form, { FormValue } from "./form";
 import Validator from "./validator";
+import Icon from "../icon/icon";
+import "./form.example.scss";
 
+const sc = scopedClassMaker("wu-form-example");
+const sc1 = scopedClassMaker("wu-form-example-code-content");
+const sc2 = scopedClassMaker("wu-form-example-API");
 const usernames = ["frank", "jack", "frankfrank", "alice", "bob"];
+
 const checkUserName = (
   username: string,
   succeed: () => void,
@@ -64,20 +71,99 @@ const FormExample: React.FC = () => {
     return map[message];
   };
   return (
-    <Form
-      fields={fields}
-      formData={formData}
-      onChange={(newValue) => setFormData(newValue)}
-      button={
-        <Fragment>
-          <button type="submit">提交</button>
-          <button>返回</button>
-        </Fragment>
-      }
-      onSubmit={() => onSubmit()}
-      transformError={transformError}
-      errors={errors}
-    ></Form>
+    <ol className="wu-form-example">
+      <li className={sc("title")}>
+        <h1>Form 表单</h1>
+        <span>
+          高性能表单控件，自带数据域管理。包含数据录入、校验以及对应样式。
+        </span>
+      </li>
+      <li className={sc("usage")}>
+        <h2>何时使用</h2>
+        <span>
+          用于创建一个实体或收集信息；需要对输入的数据类型进行校验时。
+        </span>
+      </li>
+      <li className={sc("code")}>
+        <h2>代码示例</h2>
+        <div className={sc("code-content")}>
+          <div className={sc1("form")}>
+            <Form
+              fields={fields}
+              formData={formData}
+              onChange={(newValue) => setFormData(newValue)}
+              button={
+                <Fragment>
+                  <button type="submit">提交</button>
+                  <button>返回</button>
+                </Fragment>
+              }
+              onSubmit={() => onSubmit()}
+              transformError={transformError}
+              errors={errors}
+            ></Form>
+          </div>
+          <ol className={sc1("title")}>
+            <li className={sc1("title-left")}></li>
+            <li className={sc1("title-center")}>基本使用</li>
+            <li className={sc1("title-right")}></li>
+          </ol>
+          <div className={sc1("illust")}>
+            <span className={sc1("illust-text")}>xxx</span>
+            <div className={sc1("illust-icon")}>
+              <Icon name="codeOpen" />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li className={sc("API")}>
+        <h2>API</h2>
+        <table className={sc2("table")}>
+          <thead className={sc2("table-thead")}>
+            <tr>
+              <th>参数</th>
+              <th>说明</th>
+              <th>类型</th>
+              <th>默认值</th>
+            </tr>
+          </thead>
+          <tbody className={sc2("table-tbody")}>
+            <tr>
+              <td>fields</td>
+              <td>
+                通过状态管理（如 redux）控制表单字段，如非强需求不推荐使用。
+              </td>
+              <td> FieldData[]</td>
+              <td>————</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>表单名称，会作为表单字段 id 前缀使用</td>
+              <td>string</td>
+              <td>————</td>
+            </tr>
+            <tr>
+              <td>onValuesChange</td>
+              <td>字段值更新时触发回调事件</td>
+              <td>function(changedValues, allValues)</td>
+              <td>————</td>
+            </tr>
+            <tr>
+              <td>onFinish</td>
+              <td>提交表单且数据验证成功后回调事件</td>
+              <td>function(values)</td>
+              <td>————</td>
+            </tr>
+            <tr>
+              <td>onFinishFailed</td>
+              <td>提交表单且数据验证失败后回调事件</td>
+              <td>function(value)</td>
+              <td>————</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ol>
   );
 };
 

@@ -1,5 +1,5 @@
 @import "../helpers/helpers.scss";
-.wu-layout-example {
+.wu-scroll-example {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -50,39 +50,8 @@
     &-content {
       border: 1px solid #d9d9d9;
       border-radius: 4px;
-      margin-bottom: 32px;
-      &-layouts {
+      &-scroll {
         padding: 32px;
-        &-layout {
-          padding: 16px;
-          .gu-layout-x {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #7dbcea;
-            color: white;
-            height: 50px;
-            font-size: 14px;
-          }
-          .gu-layout-y {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #108ee9;
-            color: white;
-            flex-grow: 1;
-            font-size: 14px;
-          }
-          .gu-layout-z {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #3ba0e9;
-            color: white;
-            width: 20vw;
-            font-size: 14px;
-          }
-        }
       }
       &-title {
         display: flex;
@@ -120,7 +89,7 @@
   &-API {
     display: flex;
     flex-direction: column;
-    padding: 8px 32px 32px 32px;
+    padding: 40px 32px 32px 32px;
     h2 {
       font-size: 24px;
       color: #000000d9;
