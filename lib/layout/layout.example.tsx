@@ -26,15 +26,15 @@ export default function () {
       <li className={sc("code")}>
         <h2>代码示例</h2>
         <div className={sc("code-content")}>
-          <ol className={sc1("layouts")}>
-            <li className={sc1("layouts-layout")}>
+          <ol className={sc1("items")}>
+            <li className={sc1("items-layout")}>
               <Layout>
                 <Header className="x">header</Header>
                 <Content className="y">content</Content>
                 <Footer className="x">footer</Footer>
               </Layout>
             </li>
-            <li className={sc1("layouts-layout")}>
+            <li className={sc1("items-layout")}>
               <Layout>
                 <Header className="x">header</Header>
                 <Layout>
@@ -44,7 +44,7 @@ export default function () {
                 <Footer className="x">footer</Footer>
               </Layout>
             </li>
-            <li className={sc1("layouts-layout")}>
+            <li className={sc1("items-layout")}>
               <Layout>
                 <Header className="x">header</Header>
                 <Layout>
@@ -54,7 +54,7 @@ export default function () {
                 <Footer className="x">footer</Footer>
               </Layout>
             </li>
-            <li className={sc1("layouts-layout")}>
+            <li className={sc1("items-layout")}>
               <Layout>
                 <Aside className="z">aside</Aside>
                 <Layout>

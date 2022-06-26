@@ -21,7 +21,7 @@ const IconExample: React.FunctionComponent = () => {
       <li className={sc("code")}>
         <h2>代码示例</h2>
         <div className={sc("code-content")}>
-          <div className={sc1("icons")}>
+          <div className={sc1("items")}>
             <Icon name="alipay" />
           </div>
           <ol className={sc1("title")}>

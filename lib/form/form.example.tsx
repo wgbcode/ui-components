@@ -87,7 +87,7 @@ const FormExample: React.FC = () => {
       <li className={sc("code")}>
         <h2>代码示例</h2>
         <div className={sc("code-content")}>
-          <div className={sc1("form")}>
+          <div className={sc1("items")}>
             <Form
               fields={fields}
               formData={formData}

@@ -25,7 +25,7 @@ const DialogExample: React.FunctionComponent<any> = () => {
       <li className={sc("code")}>
         <h2>代码示例</h2>
         <div className={sc("code-content")}>
-          <div className={sc1("dialog")}>
+          <div className={sc1("items")}>
             <div>
               <button onClick={() => setY(!y)}>alert 组件</button>
               <Dialog
@@ -92,7 +92,7 @@ const DialogExample: React.FunctionComponent<any> = () => {
         </div>
 
         <div className={sc("code-content")}>
-          <div className={sc1("dialog")}>
+          <div className={sc1("items")}>
             <div>
               <button onClick={() => alert("你好，我是 alert API")}>
                 alert API

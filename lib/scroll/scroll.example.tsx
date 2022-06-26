@@ -25,7 +25,7 @@ const ScrollExample: React.FC = () => {
       <li className={sc("code")}>
         <h2>代码示例</h2>
         <div className={sc("code-content")}>
-          <div className={sc1("scroll")}>
+          <div className={sc1("items")}>
             <Scroll onPull={onPull}></Scroll>
           </div>
           <ol className={sc1("title")}>

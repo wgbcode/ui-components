@@ -21,7 +21,7 @@ const ButtonExample: React.FunctionComponent = () => {
       <li className={sc("code")}>
         <h2>代码示例</h2>
         <div className={sc("code-content")}>
-          <div className={sc1("button")}>
+          <div className={sc1("items")}>
             <button>Default</button>
           </div>
           <ol className={sc1("title")}>
