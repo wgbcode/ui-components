@@ -6,7 +6,11 @@ export default classes;
 
 const scopedClassMaker = (prifix: string) => {
   return (name: string) => {
-    return [prifix, name].filter(Boolean).join("-");
+    if (name) {
+      return [prifix, name].filter(Boolean).join("-");
+    } else {
+      return prifix;
+    }
   };
 };
 
