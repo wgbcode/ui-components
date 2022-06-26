@@ -12,6 +12,7 @@ const DialogExample: React.FunctionComponent<any> = () => {
   const usageText = "需要与用户交互，同时避免中断用户的操作流程时";
   const codeContent = [
     [
+      `${name}` + 1,
       <>
         <div>
           <button onClick={() => setY(!y)}>alert 组件</button>
@@ -67,6 +68,7 @@ const DialogExample: React.FunctionComponent<any> = () => {
       "使用组件声明一个对话框，通过控制 visible 属性来显示/隐藏。",
     ],
     [
+      `${name}` + 2,
       <>
         <div>
           <button onClick={() => alert("你好，我是 alert API")}>
@@ -89,7 +91,7 @@ const DialogExample: React.FunctionComponent<any> = () => {
     ],
   ];
   const API = [
-    ["visible", "对话框是否可见", Boolean, "————"],
+    ["visible", "对话框是否可见", "boolean", "————"],
     ["title", "标题", "string | ReactNode", "————"],
     ["footer", "底部内容", "ReactNode", "————"],
     ["onConfim", "点击确认按钮时的回调", "e: React.MouseEvent => any", "————"],
@@ -97,8 +99,8 @@ const DialogExample: React.FunctionComponent<any> = () => {
     [
       "maskClosable",
       "点击蒙层是否关闭 Modal（相当于点击取消按钮）",
-      Boolean,
-      false,
+      "boolean",
+      "false",
     ],
     ["afterClose", "对话框完全关闭（离场动画结束）时的回调", "()=>any", "————"],
     ["className", "自定义 Modal 类名", "string", "————"],

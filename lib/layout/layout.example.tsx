@@ -4,9 +4,9 @@ import Header from "./header";
 import Content from "./content";
 import Footer from "./footer";
 import Aside from "./aside";
-import "./layout.example.scss";
 import CommonExample from "../common.example";
-import { scopedClassMaker } from "lib/helpers/classes";
+import { scopedClassMaker } from "../helpers/classes";
+import "./layout.example.scss";
 
 export default function () {
   const sc = scopedClassMaker("wu-layout-example-code-content-items-layout");
@@ -15,6 +15,7 @@ export default function () {
   const usageText = "xxx";
   const codeContent = [
     [
+      name,
       <>
         <div className={sc("")}>
           <Layout>
@@ -63,11 +64,10 @@ export default function () {
     [
       "hasSider",
       " 表示子元素里有Sider，一般不用指定。可用于服务端渲染时避免样式闪动",
-      Boolean,
+      "boolean",
       "————",
     ],
-    ["loading", "加载中状态", Boolean, false],
-    ["className", "自定义 button 类名", "string", "————"],
+    ["loading", "加载中状态", "boolean", "false"],
     ["onClick", "点击按钮时的回调函数", "React.MouseEventHandler", "————"],
   ];
 

@@ -9,6 +9,7 @@ const IconExample: React.FunctionComponent = () => {
   const usageText = "需要用到 svg 图标时。";
   const codeContent = [
     [
+      name,
       <Icon name="alipay" />,
       "组件形式",
       "导入 svg 图标后，可设置宽高、颜色、类名。",

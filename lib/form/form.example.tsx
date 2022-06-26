@@ -72,6 +72,7 @@ const FormExample: React.FC = () => {
   const usageText = "响应用户点击行为，触发相应业务逻辑。";
   const codeContent = [
     [
+      name,
       <Form
         fields={fields}
         formData={formData}

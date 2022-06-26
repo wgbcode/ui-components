@@ -11,10 +11,10 @@ const ScrollExample: React.FC = () => {
   const titleText = "自定义滚动条。";
   const usageText = "当需要使用自定义滚动条代替浏览器自带滚动条时。";
   const codeContent = [
-    [<Scroll onPull={onPull}></Scroll>, "基本用法", "最基本的用法。"],
+    [name, <Scroll onPull={onPull}></Scroll>, "基本用法", "最基本的用法。"],
   ];
   const API = [
-    ["scrollBarVisible", "是否始终展示滚动条", Boolean, false],
+    ["scrollBarVisible", "是否始终展示滚动条", "boolean", "false"],
     ["className", "自定义外层容器类名", "string", "————"],
     ["trackClassName", "自定义滚动条滑块轨道容器类名", "string", "————"],
     [
