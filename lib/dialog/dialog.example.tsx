@@ -9,10 +9,10 @@ const DialogExample: React.FunctionComponent<any> = () => {
   const [z, setZ] = useState(false);
   const name = "Dialog";
   const titleText = "弹出一个对话框。";
-  const usageText = "需要与用户交互，同时避免中断用户的操作流程时";
+  const usageText = "需要与用户交互，同时避免中断用户的操作流程时。";
   const codeContent = [
     [
-      `${name}` + 1,
+      name + 1,
       <>
         <div>
           <button onClick={() => setY(!y)}>alert 组件</button>
@@ -68,7 +68,7 @@ const DialogExample: React.FunctionComponent<any> = () => {
       "使用组件声明一个对话框，通过控制 visible 属性来显示/隐藏。",
     ],
     [
-      `${name}` + 2,
+      name + 2,
       <>
         <div>
           <button onClick={() => alert("你好，我是 alert API")}>

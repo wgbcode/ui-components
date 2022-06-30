@@ -1,8 +1,8 @@
-import Icon from "../icon/icon";
 import React, { Fragment, ReactElement } from "react";
 import ReactDOM from "react-dom";
-import "./dialog.scss";
 import { scopedClassMaker } from "../helpers/classes";
+import Icon from "../icon/icon";
+import "./dialog.scss";
 
 interface Props {
   visible: Boolean;
@@ -10,10 +10,9 @@ interface Props {
   onClose: () => void;
 }
 
-const scopedClass = scopedClassMaker("fui-dailog");
-const sc = scopedClass;
-
 const Dialog: React.FC<Props> = (props) => {
+  const scopedClass = scopedClassMaker("fui-dailog");
+  const sc = scopedClass;
   const result = props.visible && (
     <Fragment>
       <div className={sc("wrapper")}>
@@ -54,6 +53,7 @@ const alert = (content: string) => {
   ];
   const close = modal(content, buttons); // 先调用 modal ，再赋值 close
 };
+
 const confirm = (content: string) => {
   const buttons = [
     <button

@@ -1,5 +1,5 @@
 import React from "react";
-import "./importIcons";
+import "./importIcons"; // icons 目录文件一次性导入
 import "./icon.scss";
 import classes from "../helpers/classes";
 
@@ -10,11 +10,12 @@ interface IconProps extends React.SVGAttributes<SVGElement> {
 const Icon: React.FunctionComponent<IconProps> = ({
   className,
   name,
+  style,
   ...restProps
 }) => {
   return (
-    <svg className={classes("fui-icon", className)} {...restProps}>
-      <use xlinkHref={`#${name}`} />
+    <svg className={classes("fui-icon", className)}>
+      <use xlinkHref={`#${name}`} style={style} {...restProps} />
     </svg>
   );
 };

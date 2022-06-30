@@ -79,8 +79,15 @@
           color: #6e6e6e;
         }
         &-icon {
-          height: 1em;
-          width: 1em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 3em;
+          width: 3em;
+          .fui-icon {
+            height: 1.2em;
+            width: 1.2em;
+          }
         }
       }
     }

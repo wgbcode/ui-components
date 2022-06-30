@@ -3,14 +3,14 @@
 
 .wu-button-example {
   @include commonExample;
-  &-code-content-items {
-    button {
-      padding: 8px 16px;
-      font-size: 14px;
-      color: #6e6e6e;
-      background: white;
-      border: 1px solid rgb(0, 0, 0, 0.2);
-      border-radius: 4px;
+  &-code-content {
+    margin-bottom: 32px;
+    &-items {
+      flex-direction: row;
+      &-button2 {
+        background: #bec8c8;
+        margin-bottom: 16px;
+      }
     }
   }
 }

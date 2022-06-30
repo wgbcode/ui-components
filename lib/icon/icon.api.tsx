@@ -1,12 +1,23 @@
 import React from "react";
-import Icon from "./icon";
+import "./importIcons"; // icons 目录文件一次性导入
+import "./icon.scss";
+import classes from "../helpers/classes";
 
-const IconExample: React.FunctionComponent = () => {
+interface IconProps extends React.SVGAttributes<SVGElement> {
+  name: string;
+}
+
+const Icon: React.FunctionComponent<IconProps> = ({
+  className,
+  name,
+  style,
+  ...restProps
+}) => {
   return (
-    <div>
-      <Icon name="alipay" />
-    </div>
+    <svg className={classes("fui-icon", className)}>
+      <use xlinkHref={`#${name}`} style={style} {...restProps} />
+    </svg>
   );
 };
 
-export default IconExample;
+export default Icon;

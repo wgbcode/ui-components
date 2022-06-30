@@ -1,6 +1,6 @@
 import Icon from "./icon/icon";
 import React, { useState } from "react";
-import { scopedClassMaker } from "./helpers/classes";
+import classes, { scopedClassMaker } from "./helpers/classes";
 import APICode from "./apiCode";
 
 export interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -27,13 +27,12 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
     let index = container.indexOf(value);
     if (index < 0) {
       container = [...itemName, value];
-      setItemName(container);
     } else {
       let container2 = JSON.parse(JSON.stringify(container));
       container2.splice(index, 1);
       container = container2;
-      setItemName(container);
     }
+    setItemName(container);
   };
   return (
     <ol className={sc("")}>
@@ -49,7 +48,14 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
         <h2>代码示例</h2>
         {codeContent.map((item) => (
           <div className={sc1("")} key={item[0]}>
-            <div className={sc1("items")}>{item[1]}</div>
+            <div
+              className={classes(
+                sc1("items"),
+                sc1("items-" + `${item[0].toLowerCase()}`)
+              )}
+            >
+              {item[1]}
+            </div>
             <ol className={sc1("title")}>
               <li className={sc1("title-left")}></li>
               <li className={sc1("title-center")}>{item[2]}</li>
@@ -57,8 +63,11 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
             </ol>
             <div className={sc1("illust")}>
               <span className={sc1("illust-text")}>{item[3]}</span>
-              <div className={sc1("illust-icon")}>
-                <Icon name="codeOpen" onClick={() => onCodeVisible(item[0])} />
+              <div
+                className={sc1("illust-icon")}
+                onClick={() => onCodeVisible(item[0])}
+              >
+                <Icon name="codeOpen" />
               </div>
             </div>
 
