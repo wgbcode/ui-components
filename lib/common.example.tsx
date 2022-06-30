@@ -1,17 +1,19 @@
 import Icon from "./icon/icon";
-import React from "react";
+import React, { useState } from "react";
 import { scopedClassMaker } from "./helpers/classes";
+import APICode from "./apiCode";
 
-interface Props extends React.HTMLAttributes<HTMLElement> {
+export interface Props extends React.HTMLAttributes<HTMLElement> {
   name: string;
   titleText: string;
   usageText: string;
   codeContent: Array<any[]>;
   API: Array<any[]>;
+  apiCodeFile?: any;
 }
 
 const CommonExample: React.FunctionComponent<Props> = (props) => {
-  const { name, titleText, usageText, codeContent, API } = props;
+  let { name, titleText, usageText, codeContent, API, apiCodeFile } = props;
   const sc = scopedClassMaker("wu-" + `${name.toLowerCase()}` + "-example");
   const sc1 = scopedClassMaker(
     "wu-" + `${name.toLowerCase()}` + "-example-code-content"
@@ -19,6 +21,31 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
   const sc2 = scopedClassMaker(
     "wu-" + `${name.toLowerCase()}` + "-example-API"
   );
+  const [codeVisible, setCodeVisible] = useState(false);
+  const [itemName, setItemName] = useState([""]);
+  let container: string[] = itemName;
+  let boolean = codeVisible;
+  const onCodeVisible = (value: string) => {
+    setCodeVisible(!codeVisible);
+    if (itemName.indexOf(value) < 0) {
+      container = [...itemName, value];
+      if (container.length > 2) {
+        boolean = true;
+        setCodeVisible(boolean);
+      }
+      setItemName(container);
+    } else {
+      if (container.length > 2) {
+        boolean = true;
+        setCodeVisible(boolean);
+      }
+      let index = container.indexOf(value);
+      let container2 = JSON.parse(JSON.stringify(container));
+      container2.splice(index, 1);
+      container = container2;
+      setItemName(container);
+    }
+  };
   return (
     <ol className={sc("")}>
       <li className={sc("title")}>
@@ -42,12 +69,17 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
             <div className={sc1("illust")}>
               <span className={sc1("illust-text")}>{item[3]}</span>
               <div className={sc1("illust-icon")}>
-                <Icon name="codeOpen" />
+                <Icon name="codeOpen" onClick={() => onCodeVisible(item[0])} />
               </div>
             </div>
+
+            {container.indexOf(item[0]) >= 0 && boolean && apiCodeFile && (
+              <APICode code={apiCodeFile} />
+            )}
           </div>
         ))}
       </li>
+
       <li className={sc2("")}>
         <h2>API</h2>
         <table className={sc2("table")}>

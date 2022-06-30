@@ -78,6 +78,7 @@ export default function () {
       usageText={usageText}
       codeContent={codeContent}
       API={API}
+      apiCodeFile={require("!!raw-loader!./layout.api.tsx")}
     />
   );
 }

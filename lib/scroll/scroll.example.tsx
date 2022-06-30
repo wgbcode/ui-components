@@ -34,6 +34,7 @@ const ScrollExample: React.FC = () => {
       usageText={usageText}
       codeContent={codeContent}
       API={API}
+      apiCodeFile={require("!!raw-loader!./scroll.api.tsx")}
     />
   );
 };

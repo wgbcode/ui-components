@@ -16,8 +16,8 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   onChange: (newValue: FormValue) => void;
   button: ReactFragment;
   onSubmit: () => void;
-  transformError: (message: string) => FormValue;
-  errors: FormValue;
+  transformError?: (message: string) => FormValue;
+  errors?: FormValue;
 }
 
 const Form: React.FC<Props> = (props) => {
@@ -54,7 +54,12 @@ const Form: React.FC<Props> = (props) => {
                   onChange={(e) => onInputChange(f.name, e.target.value)}
                 />
               </td>
-              <td>{errors[f.name] && transformError(errors[f.name][0])}</td>
+              <td>
+                {errors &&
+                  transformError &&
+                  errors[f.name] &&
+                  transformError(errors[f.name][0])}
+              </td>
             </tr>
           ))}
           <tr>

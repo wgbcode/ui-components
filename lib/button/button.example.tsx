@@ -2,9 +2,6 @@ import React from "react";
 import "./button.example.scss";
 import CommonExample from "../common.example";
 
-// const x = require("!!raw-loader!");
-// console.log(x);
-
 const ButtonExample: React.FunctionComponent = () => {
   const name = "Button";
   const titleText = "按钮用于开始一个即时操作。";
@@ -31,13 +28,16 @@ const ButtonExample: React.FunctionComponent = () => {
   ];
 
   return (
-    <CommonExample
-      name={name}
-      titleText={titleText}
-      usageText={usageText}
-      codeContent={codeContent}
-      API={API}
-    />
+    <div>
+      <CommonExample
+        name={name}
+        titleText={titleText}
+        usageText={usageText}
+        codeContent={codeContent}
+        API={API}
+        apiCodeFile={require("!!raw-loader!./button.api.tsx")}
+      />
+    </div>
   );
 };
 

@@ -4,13 +4,13 @@ import { scopedClassMaker } from "../helpers/classes";
 const sc = scopedClassMaker("gu-layout");
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
-  className: string;
+  className?: string;
 }
 
 const Content: React.FC<Props> = (props) => {
   const { className, ...rest } = props;
   return (
-    <div className={sc(className)} {...rest}>
+    <div className={className ? sc(className) : ""} {...rest}>
       {props.children}
     </div>
   );

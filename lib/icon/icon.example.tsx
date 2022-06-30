@@ -28,6 +28,7 @@ const IconExample: React.FunctionComponent = () => {
       usageText={usageText}
       codeContent={codeContent}
       API={API}
+      apiCodeFile={require("!!raw-loader!./icon.api.tsx")}
     />
   );
 };

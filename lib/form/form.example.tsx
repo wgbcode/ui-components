@@ -126,6 +126,7 @@ const FormExample: React.FC = () => {
       usageText={usageText}
       codeContent={codeContent}
       API={API}
+      apiCodeFile={require("!!raw-loader!./form.api.tsx")}
     />
   );
 };

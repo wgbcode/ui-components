@@ -112,6 +112,7 @@ const DialogExample: React.FunctionComponent<any> = () => {
       usageText={usageText}
       codeContent={codeContent}
       API={API}
+      apiCodeFile={require("!!raw-loader!./dialog.api.tsx")}
     />
   );
 };
