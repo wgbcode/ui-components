@@ -21,25 +21,14 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
   const sc2 = scopedClassMaker(
     "wu-" + `${name.toLowerCase()}` + "-example-API"
   );
-  const [codeVisible, setCodeVisible] = useState(false);
   const [itemName, setItemName] = useState([""]);
-  let container: string[] = itemName;
-  let boolean = codeVisible;
+  let container = itemName;
   const onCodeVisible = (value: string) => {
-    setCodeVisible(!codeVisible);
-    if (itemName.indexOf(value) < 0) {
+    let index = container.indexOf(value);
+    if (index < 0) {
       container = [...itemName, value];
-      if (container.length > 2) {
-        boolean = true;
-        setCodeVisible(boolean);
-      }
       setItemName(container);
     } else {
-      if (container.length > 2) {
-        boolean = true;
-        setCodeVisible(boolean);
-      }
-      let index = container.indexOf(value);
       let container2 = JSON.parse(JSON.stringify(container));
       container2.splice(index, 1);
       container = container2;
@@ -73,7 +62,7 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
               </div>
             </div>
 
-            {container.indexOf(item[0]) >= 0 && boolean && apiCodeFile && (
+            {container.indexOf(item[0]) >= 0 && apiCodeFile && (
               <APICode code={apiCodeFile} />
             )}
           </div>
