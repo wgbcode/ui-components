@@ -23,9 +23,10 @@
       }
     }
     &-footer {
+      padding-right: 32px;
       .fui-icon {
-        height: 1.5em;
-        width: 1.5em;
+        height: 2em;
+        width: 2em;
       }
     }
   }
@@ -35,16 +36,19 @@
     font-family: $hei;
     overflow: hidden;
     &-aside {
+      border-right: 1px solid #d9d9d9;
+      margin: 48px 0;
       &-title {
-        padding: 32px 0 16px 32px;
+        padding: 0px 0 24px 60px;
         font-size: 16px;
+        font-weight: 500;
       }
       &-nav {
         li {
           font-size: 16px;
           a {
             display: block;
-            padding: 16px 72px 16px 32px;
+            padding: 16px 108px 16px 60px;
             text-decoration: none;
             color: #6e6e6e;
             white-space: nowrap;
@@ -62,28 +66,7 @@
     &-main {
       flex-grow: 1;
       overflow: auto;
+      padding: 48px 100px;
     }
   }
-  // &-footer {
-  //   display: flex;
-  //   justify-content: center;
-  //   background-color: #34383b;
-  //   font-size: 14px;
-  //   color: rgba(255, 255, 255, 0.55);
-  //   &-left,
-  //   &-right {
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     padding: 8px 16px;
-  //     .fui-icon {
-  //       height: 1.5em;
-  //       width: 1.5em;
-  //     }
-  //     span {
-  //       text-align: center;
-  //       padding-left: 8px;
-  //     }
-  //   }
-  // }
 }

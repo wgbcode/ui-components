@@ -25,17 +25,20 @@ ReactDOM.render(
           </div>
           <h2 className={sc1("header-text")}>Wu-UI-React</h2>
         </div>
-        <div className={sc1("footer")}>
+        <a
+          className={sc1("footer")}
+          href="https://github.com/wgbcode/wu-ui-react"
+        >
           <Icon name="github" />
-        </div>
+        </a>
       </header>
       <div className={sc("content")}>
         <aside className={sc2("aside")}>
-          <div className={sc2("aside-title")}>组件总览</div>
+          <h1 className={sc2("aside-title")}>组件总览</h1>
           <ul className={sc2("aside-nav")}>
             <li>
               <NavLink to="/button" activeClassName="active">
-                Button
+                Button 按钮
               </NavLink>
             </li>
             <li>
@@ -74,17 +77,6 @@ ReactDOM.render(
           <Route path="/scroll" component={ScrollExample} />
         </main>
       </div>
-      {/* <footer className={sc("footer")}>
-        <div className={sc("footer-left")}>
-          <Icon name="github" />
-          <span>Github</span>
-        </div>
-
-        <div className={sc("footer-right")}>
-          <Icon name="react" />
-          <span>Wu-UI-React</span>
-        </div>
-      </footer> */}
     </div>
   </Router>,
   document.querySelector("#root")
