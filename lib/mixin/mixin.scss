@@ -1,3 +1,5 @@
+@import "../helpers/helpers.scss";
+
 @mixin commonExample() {
   display: flex;
   flex-direction: column;
@@ -71,19 +73,19 @@
         }
       }
       &-illust {
-        display: flex;
+        @extend %flexCenter;
         justify-content: space-between;
         padding: 16px 32px;
         &-text {
           font-size: 14px;
+          line-height: 24px;
           color: #6e6e6e;
         }
         &-icon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          @extend %flexCenter;
           height: 3em;
           width: 3em;
+          margin-left: 16px;
           .fui-icon {
             height: 1.2em;
             width: 1.2em;
