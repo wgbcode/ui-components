@@ -11,8 +11,8 @@ import "./layout.example.scss";
 export default function () {
   const sc = scopedClassMaker("wu-layout-example-code-content-items-layout");
   const name = "Layout";
-  const titleText = "协助进行页面级整体布局。";
-  const usageText = "xxx";
+  const titleText = "页面的基本布局。";
+  const usageText = "制作网页需要对页面进行布局时。";
   const codeContent = [
     [
       name,
@@ -56,19 +56,17 @@ export default function () {
         </div>
       </>,
       "基本结构",
-      "典型的页面布局。",
+      "根据有无 Aside，以及 Aside 的位置，可以将页面布局分为上述四种基本形式。",
     ],
   ];
   const API = [
     ["className", "容器 className", "string", "————"],
     [
       "hasSider",
-      " 表示子元素里有Sider，一般不用指定。可用于服务端渲染时避免样式闪动",
+      " 判断子元素里是否有 Sider，但不需要主动传参。",
       "boolean",
       "————",
     ],
-    ["loading", "加载中状态", "boolean", "false"],
-    ["onClick", "点击按钮时的回调函数", "React.MouseEventHandler", "————"],
   ];
 
   return (

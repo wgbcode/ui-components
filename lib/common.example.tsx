@@ -37,7 +37,7 @@ const CommonExample: React.FunctionComponent<Props> = (props) => {
   return (
     <ol className={sc("")}>
       <li className={sc("title")}>
-        <h1>{`${name}` + "按钮"}</h1>
+        <h1>{name}</h1>
         <span>{titleText}</span>
       </li>
       <li className={sc("usage")}>

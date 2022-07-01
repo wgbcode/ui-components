@@ -1,50 +1,26 @@
-import React, { Fragment } from "react";
-import Layout from "./layout";
-import Header from "./header";
-import Content from "./content";
-import Footer from "./footer";
-import Aside from "./aside";
+import React, { ReactElement } from "react";
+import classes from "../helpers/classes";
+import "./layout.scss";
 
-export default function () {
-  return (
-    <Fragment>
-      <div>
-        <Layout>
-          <Header>header</Header>
-          <Content>content</Content>
-          <Footer>footer</Footer>
-        </Layout>
-      </div>
-      <div>
-        <Layout>
-          <Header>header</Header>
-          <Layout>
-            <Aside>aside</Aside>
-            <Content>content</Content>
-          </Layout>
-          <Footer>footer</Footer>
-        </Layout>
-      </div>
-      <div>
-        <Layout>
-          <Header>header</Header>
-          <Layout>
-            <Content>content</Content>
-            <Aside>aside</Aside>
-          </Layout>
-          <Footer>footer</Footer>
-        </Layout>
-      </div>
-      <div>
-        <Layout>
-          <Aside>aside</Aside>
-          <Layout>
-            <Header>header</Header>
-            <Content>content</Content>
-            <Footer>footer</Footer>
-          </Layout>
-        </Layout>
-      </div>
-    </Fragment>
-  );
+interface Props extends React.HTMLAttributes<HTMLElement> {
+  className?: string;
 }
+
+const Layout: React.FC<Props> = ({ className, children, ...rest }) => {
+  const hasAside = (children as ReactElement[])
+    .map((item) => item.props.children)
+    .includes("aside"); // 判断子代是否有 aside 元素，并据此布局样式。
+  return (
+    <div
+      className={classes(
+        className,
+        hasAside ? "wu-layout-hasAside" : "wu-layout-noAside"
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default Layout;
