@@ -81,3 +81,12 @@ ReactDOM.render(
   </Router>,
   document.querySelector("#root")
 );
+
+window.addEventListener("resize", () => {
+  const clientWidth = document.body.clientWidth;
+  const main = document.querySelector(
+    ".wu-webPage-content-main"
+  ) as HTMLElement;
+  if (clientWidth >= 1500) main.style.padding = "48px 100px";
+  else main.style.padding = "48px 16px";
+});
