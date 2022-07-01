@@ -1,8 +1,10 @@
 import React, { ReactFragment } from "react";
+import classes, { scopedClassMaker } from "../helpers/classes";
+import "./form.scss";
 
 export interface FormValue {
   [key: string]: any;
-} // 将类型导到父组件
+}
 
 interface FieldsValue {
   name: string;
@@ -11,25 +13,29 @@ interface FieldsValue {
 }
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
-  fields: Array<FieldsValue>;
   formData: FormValue;
-  onChange: (newValue: FormValue) => void;
-  button: ReactFragment;
-  onSubmit: () => void;
-  transformError?: (message: string) => FormValue;
+  fields: Array<FieldsValue>;
   errors?: FormValue;
+  onChange: (newValue: FormValue) => void;
+  onSubmit: () => void;
+  onReset: () => void;
+  transformError?: (message: string) => FormValue;
+  className?: string;
+  button: ReactFragment;
 }
 
-const Form: React.FC<Props> = (props) => {
-  const {
-    formData,
-    fields,
-    errors,
-    transformError,
-    button,
-    onChange,
-    onSubmit,
-  } = props;
+const Form: React.FC<Props> = ({
+  formData,
+  fields,
+  errors,
+  transformError,
+  button,
+  onChange,
+  onSubmit,
+  onReset,
+  className,
+}) => {
+  const sc = scopedClassMaker("wu-form-tbody-tr-td");
   const onInputChange = (name: string, value: string) => {
     const newFormData = { ...formData, [name]: value };
     onChange(newFormData);
@@ -38,31 +44,42 @@ const Form: React.FC<Props> = (props) => {
     e.preventDefault();
     onSubmit();
   };
+  const reset = (e: any) => {
+    e.preventDefault();
+    onReset();
+  };
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} onReset={reset} className={classes(className)}>
       <table>
-        <tbody>
-          {fields.map((f: FieldsValue) => (
-            <tr key={f.name}>
+        {fields.map((f: FieldsValue) => (
+          <tbody key={f.name}>
+            <tr>
               <td>
-                <span>{f.label}</span>
+                <span className={sc("name")}>{f.label}</span>
               </td>
               <td>
                 <input
+                  className={sc("input")}
                   type={f.input.type}
-                  value={formData[f.name]} // 需先声明 key 的类型，与 f.name 保持一致
+                  value={formData[f.name]}
                   onChange={(e) => onInputChange(f.name, e.target.value)}
                 />
               </td>
-              <td>
+            </tr>
+            <tr>
+              <td style={{ height: 24 }}></td>
+              <td className={sc("error")}>
                 {errors &&
                   transformError &&
                   errors[f.name] &&
                   transformError(errors[f.name][0])}
               </td>
             </tr>
-          ))}
+          </tbody>
+        ))}
+        <tbody>
           <tr>
+            <td></td>
             <td>{button}</td>
           </tr>
         </tbody>

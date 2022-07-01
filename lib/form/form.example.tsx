@@ -3,8 +3,10 @@ import Form, { FormValue } from "./form";
 import Validator from "./validator";
 import "./form.example.scss";
 import CommonExample from "../common.example";
+import { scopedClassMaker } from "../helpers/classes";
 
 const usernames = ["frank", "jack", "frankfrank", "alice", "bob"];
+const sc = scopedClassMaker("wu-form-tbody-tr-td");
 
 const checkUserName = (
   username: string,
@@ -20,12 +22,12 @@ const checkUserName = (
 
 const FormExample: React.FC = () => {
   const [formData, setFormData] = useState<FormValue>({
-    usename: "",
+    username: "",
     password: "",
   });
   const [fields] = useState([
-    { name: "usename", label: "用户名", input: { type: "text" } },
-    { name: "password", label: "密码", input: { type: "text" } },
+    { name: "username", label: "Username", input: { type: "text" } },
+    { name: "password", label: "Password", input: { type: "text" } },
   ]);
   const [errors, setErrors] = useState({});
   const validator = (username: string) => {
@@ -42,34 +44,37 @@ const FormExample: React.FC = () => {
   }
   const onSubmit = () => {
     const rules = [
-      { key: "usename", required: true },
-      { key: "usename", validator },
-      { key: "usename", minLength: 6, maxLength: 16 },
+      { key: "username", required: true },
+      { key: "username", validator },
+      { key: "username", minLength: 6, maxLength: 16 },
       { key: "password", required: true },
       { key: "password", pattern: /^[A-Za-z0-9]+$/ },
     ];
     Validator(formData, rules, (errors) => {
-      console.log(errors);
       setErrors(errors);
       if (noError(errors)) {
-        // 没错
+        console.log("输入正确，noError。");
       }
     });
   };
+  const onReset = () => {
+    setFormData({ username: "", password: "" });
+    setErrors({});
+  };
   const transformError = (message: string) => {
     const map: any = {
-      unique: "用户名已存在",
-      required: "输入内容不能为空",
-      minLength: "输入内容小于6个字符",
-      maxLength: "输入内容大于16个字符",
-      pattern: "字符样式不匹配，样式应为 0-9 | a-z | A-Z",
+      unique: "The username already exists!",
+      required: "Please input your content!",
+      minLength: "Input content is less than 6 characters!",
+      maxLength: "Input content is more than 16 characters!",
+      pattern:
+        "Character style does not match, you should enter 0-9 | a-z | A-Z!",
     };
     return map[message];
   };
   const name = "Form";
-  const titleText =
-    "高性能表单控件，自带数据域管理。包含数据录入、校验以及对应样式。";
-  const usageText = "响应用户点击行为，触发相应业务逻辑。";
+  const titleText = "Form 表单控件，功能包含数据录入和数据校验。";
+  const usageText = "需要用户输入内容时。";
   const codeContent = [
     [
       name,
@@ -79,42 +84,59 @@ const FormExample: React.FC = () => {
         onChange={(newValue) => setFormData(newValue)}
         button={
           <Fragment>
-            <button type="submit">提交</button>
-            <button>返回</button>
+            <button className={sc("submit")} type="submit">
+              Submit
+            </button>
+            <button className={sc("reset")} type="reset">
+              Reset
+            </button>
           </Fragment>
         }
         onSubmit={() => onSubmit()}
+        onReset={() => onReset()}
         transformError={transformError}
         errors={errors}
       ></Form>,
       "基本使用",
-      "xxx",
+      "表单输入内容后，点 submit 按钮会对输入的表单数据进行检验，若不符合检验规则会输出错误信息，点 reset 按键会重置表单数据。",
     ],
   ];
   const API = [
     [
+      "formData",
+      "Form 表单当前的 input 数据",
+      "FormValue",
+      "{username:'', pasword:''}",
+    ],
+    [
       "fields",
-      "通过状态管理（如 redux）控制表单字段，如非强需求不推荐使用。",
-      "FieldData[]",
+      "标记 Form 表单每一个子元素，记录有每个子元素 inputType 等信息。",
+      "Array<FieldsValue>",
       "————",
     ],
-    ["name", "表单名称，会作为表单字段 id 前缀使用", "string", "————"],
+    ["errors", "表单提交后，经校验返回的错误集。", "FieldData[]", "————"],
     [
-      "onValuesChange",
-      "字段值更新时触发回调事件",
-      "function(changedValues, allValues)",
-      "————",
-    ],
-    [
-      "onFinish",
-      "提交表单且数据验证成功后回调事件",
-      "function(values)",
+      "onChange",
+      "字段值更新时触发的回调事件",
+      "(newValue: FormValue) => void",
       "————",
     ],
     [
-      "onFinishFailed",
-      "提交表单且数据验证失败后回调事件",
-      "function(value)",
+      "onSubmit",
+      "提交表单后的回调函数，会根据校验规则对提交的内容进行验证。",
+      "()=>void",
+      "————",
+    ],
+    [
+      "onReset",
+      "数据重置回调函数，会清空当前的 formData、errors。",
+      "()=>void",
+      "————",
+    ],
+    [
+      "transformError",
+      "错误信息转换回调函数，根据返回的错误信息转换成对应的字符并渲染到页面。",
+      "(message: string) => FormValue",
       "————",
     ],
   ];
