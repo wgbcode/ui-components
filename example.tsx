@@ -74,7 +74,7 @@ ReactDOM.render(
           <Route path="/scroll" component={ScrollExample} />
         </main>
       </div>
-      <footer className={sc("footer")}>
+      {/* <footer className={sc("footer")}>
         <div className={sc("footer-left")}>
           <Icon name="github" />
           <span>Github</span>
@@ -84,7 +84,7 @@ ReactDOM.render(
           <Icon name="react" />
           <span>Wu-UI-React</span>
         </div>
-      </footer>
+      </footer> */}
     </div>
   </Router>,
   document.querySelector("#root")

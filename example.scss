@@ -64,26 +64,26 @@
       overflow: auto;
     }
   }
-  &-footer {
-    display: flex;
-    justify-content: center;
-    background-color: #34383b;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.55);
-    &-left,
-    &-right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 16px;
-      .fui-icon {
-        height: 1.5em;
-        width: 1.5em;
-      }
-      span {
-        text-align: center;
-        padding-left: 8px;
-      }
-    }
-  }
+  // &-footer {
+  //   display: flex;
+  //   justify-content: center;
+  //   background-color: #34383b;
+  //   font-size: 14px;
+  //   color: rgba(255, 255, 255, 0.55);
+  //   &-left,
+  //   &-right {
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     padding: 8px 16px;
+  //     .fui-icon {
+  //       height: 1.5em;
+  //       width: 1.5em;
+  //     }
+  //     span {
+  //       text-align: center;
+  //       padding-left: 8px;
+  //     }
+  //   }
+  // }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import classes, { scopedClassMaker } from "../helpers/classes";
 import "./scroll.scss";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -65,9 +66,8 @@ const Scroll: React.FC<Props> = (props) => {
     }
     timeIdRef.current = window.setTimeout(() => {
       setBarVisible(false);
-    }, 1000);
+    }, 1500);
   };
-
   const onMouseDownBar = (e: React.MouseEvent) => {
     draggingRef.current = true;
     firstYRef.current = e.clientY;
@@ -109,10 +109,11 @@ const Scroll: React.FC<Props> = (props) => {
       setPullBoxHeightY(0);
     }
   };
+  const sc = scopedClassMaker("wu-scroll");
   return (
-    <div className="fui-scroll">
+    <div className={classes(props.className, sc(""))}>
       <div
-        className="fui-scroll-item"
+        className={sc("item")}
         style={{
           right: -scrollbarWidth(),
         }}
@@ -123,50 +124,45 @@ const Scroll: React.FC<Props> = (props) => {
         onTouchEnd={onTouchEnd}
       >
         <div
-          className="fui-scroll-item-pulling"
+          className={sc("item-pulling")}
           style={{ height: `${pullBoxHeightY}px` }}
         >
-          {pullBoxHeightY > 20 ? "下拉更新" : ""}
+          {pullBoxHeightY > 20 ? "下拉更新，调用 onPull 函数。" : ""}
         </div>
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>5</p>
-        <p>6</p>
-        <p>7</p>
-        <p>8</p>
-        <p>9</p>
-        <p>10</p>
-        <p>11</p>
-        <p>12</p>
-        <p>13</p>
-        <p>14</p>
-        <p>15</p>
-        <p>16</p>
-        <p>17</p>
-        <p>18</p>
-        <p>19</p>
-        <p>20</p>
-        <p>21</p>
-        <p>22</p>
-        <p>23</p>
-        <p>24</p>
-        <p>25</p>
-        <p>26</p>
-        <p>27</p>
-        <p>28</p>
-        <p>29</p>
-        <p>30</p>
-        <p>31</p>
-        <p>32</p>
-        <p>33</p>
-        <p>34</p>
-        <p>35</p>
+        <p>scroll - 1</p>
+        <p>scroll - 2</p>
+        <p>scroll - 3</p>
+        <p>scroll - 4</p>
+        <p>scroll - 5</p>
+        <p>scroll - 6</p>
+        <p>scroll - 7</p>
+        <p>scroll - 8</p>
+        <p>scroll - 9</p>
+        <p>scroll - 10</p>
+        <p>scroll - 11</p>
+        <p>scroll - 12</p>
+        <p>scroll - 13</p>
+        <p>scroll - 14</p>
+        <p>scroll - 15</p>
+        <p>scroll - 16</p>
+        <p>scroll - 17</p>
+        <p>scroll - 18</p>
+        <p>scroll - 19</p>
+        <p>scroll - 20</p>
+        <p>scroll - 21</p>
+        <p>scroll - 22</p>
+        <p>scroll - 23</p>
+        <p>scroll - 24</p>
+        <p>scroll - 25</p>
+        <p>scroll - 26</p>
+        <p>scroll - 27</p>
+        <p>scroll - 28</p>
+        <p>scroll - 29</p>
+        <p>scroll - 30</p>
       </div>
       {barVisible && (
         <div
-          className="fui-scroll-bar"
+          className={sc("bar")}
           style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
           onMouseDown={onMouseDownBar}
         ></div>
