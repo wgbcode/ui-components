@@ -25,6 +25,9 @@
     "url": "https://github.com/FrankFang/frank-test-2/issues"
   },
   "homepage": "https://github.com/FrankFang/frank-test-2#readme",
+  "resolutions": {
+    "@types/react": "^16.8.7"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",

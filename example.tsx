@@ -14,7 +14,6 @@ import "./example.scss";
 const sc = scopedClassMaker("wu-webPage");
 const sc1 = scopedClassMaker("wu-webPage-navBar");
 const sc2 = scopedClassMaker("wu-webPage-content");
-
 ReactDOM.render(
   <Router>
     <div className="wu-webPage">
