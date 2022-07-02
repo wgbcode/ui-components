@@ -69,13 +69,13 @@ ReactDOM.render(
             </ul>
           </aside>
           <main className={sc2("main")}>
+            <Route path="/" component={ButtonExample} />
             <Route path="/button" component={ButtonExample} />
             <Route path="/icon" component={IconExample} />
             <Route path="/dialog" component={DialogExample} />
             <Route path="/layout" component={LayoutExample} />
             <Route path="/form" component={FormExample} />
             <Route path="/scroll" component={ScrollExample} />
-            <Route path="/" component={ButtonExample} />
           </main>
         </div>
       </div>
