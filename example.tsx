@@ -65,6 +65,9 @@ ReactDOM.render(
                 Scroll 滚动条
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/"></NavLink>
+            </li>
           </ul>
         </aside>
         <main className={sc2("main")}>
@@ -74,6 +77,7 @@ ReactDOM.render(
           <Route path="/layout" component={LayoutExample} />
           <Route path="/form" component={FormExample} />
           <Route path="/scroll" component={ScrollExample} />
+          <Route path="/" component={ButtonExample} />
         </main>
       </div>
     </div>
