@@ -16,13 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "./"
+    "url": "https://github.com/wgbcode/wu-ui-react"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wgbcode/wu-ui-react"
+    "url": "https://github.com/wgbcode/wu-ui-react/issues"
   },
   "homepage": "./",
   "resolutions": {
